@@ -36,4 +36,6 @@ public final class GlobalConfiguration {
     private RegistryCenterConfigurations registryCenterConfigurations;
     
     private EventTraceDataSourceConfigurations eventTraceDataSourceConfigurations;
+
+    private DubboJobConfigurations dubboJobConfigurations;
 }

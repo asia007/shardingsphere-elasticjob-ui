@@ -33,6 +33,15 @@ export default {
         ]
       },
       {
+        title: 'job dynamic configuration',
+        child: [
+          {
+            title: 'dubbo job dynamic configuration',
+            href: '/dubbo-job'
+          }
+        ]
+      },
+      {
         title: 'Job operation',
         child: [
           {
@@ -137,6 +146,47 @@ export default {
       centerType: 'Please select a Center Type',
       orchestrationName: 'Please enter a Orchestration Name',
       digest: 'Please enter a digest'
+    }
+  },
+  dubboJob: {
+    btnTxt: 'ADD',
+    dubboJobDialog: {
+      title: 'Add a dubbo job',
+      editTitle: 'Edit dubbo job',
+      name: 'dubbo job name',
+      corn: 'dubbo job corn',
+      desc: 'job description',
+      zkAddressList: 'dubbo ZK address',
+      group: 'dubbo group',
+      version: 'dubbo version',
+      timeout: 'timeout',
+      interfaceName: 'interface name',
+      method: 'method',
+      args: 'args',
+      btnConfirmTxt: 'Confirm',
+      btnCancelTxt: 'Cancel',
+      btnConnectTxt: 'Test Connect',
+      btnConnectTip: 'The test connection will execute the Dubbo service. Please ensure that the test connection does' +
+        ' not affect' +
+        ' the service\n!!',
+    },
+    table: {
+      operate: 'Operate',
+      operateDel: '\n' +
+        '\n' +
+        'Before deleting, please confirm that the job has been executed and the service has terminated the task!!\n'
+    },
+    rules: {
+      name: 'Please enter the name of the dubbo job',
+      corn: 'Please enter the corn of the dubbo job',
+      desc: 'Please enter the description of the dubbo job',
+      zkAddressList: 'Please enter the ZK address of the dubbo job,e.g. is 192.xx.xx.1:2181,192.xx.xx.2:2181,192.xx.xx.3:2181',
+      group: 'Please enter the group of the dubbo job',
+      version: 'Please enter the version of the dubbo jobn',
+      timeout: 'Please enter the timeout of the dubbo job，unit:millisecond，default 3000 millisecond',
+      interfaceName: 'Please enter the class name of the dubbo job',
+      method: 'Please enter the method of the dubbo job',
+      args: 'Please enter the parameter of the dubbo job，Multiple are separated by "," only support "String"'
     }
   },
   dataSource: {

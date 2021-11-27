@@ -33,6 +33,15 @@ export default {
         ]
       },
       {
+        title: '作业动态配置',
+        child: [
+          {
+            title: 'dubbo作业动态配置',
+            href: '/dubbo-job'
+          }
+        ]
+      },
+      {
         title: '作业操作',
         child: [
           {
@@ -139,6 +148,43 @@ export default {
       digest: '请输入登录凭证'
     }
   },
+  dubboJob: {
+    btnTxt: '添加',
+    dubboJobDialog: {
+      title: '添加dubbo作业',
+      editTitle: '编辑dubbo作业',
+      name: 'dubbo作业名称',
+      corn: 'dubbo作业调度频率',
+      desc:'dubbo作业说明',
+      zkAddressList: 'dubbo ZK地址',
+      group: 'dubbo group',
+      version: 'dubbo version',
+      timeout: '调用超时时间',
+      interfaceName: '接口全类名',
+      method: '调用方法',
+      args: '调用方法入参',
+      btnConfirmTxt: '确定',
+      btnConnectTxt: '测试连接',
+      btnConnectTip:'测试连接会执行dubbo服务，请确保对服务不影响的情况下测试连接！！',
+      btnCancelTxt: '取消'
+    },
+    table: {
+      operate: '操作',
+      operateDel: '删除操作前，请确认作业已执行完毕并且服务已终止任务！！'
+    },
+    rules: {
+      name: '请输dubbo作业名称',
+      corn: '请输dubbo作业调度频率',
+      desc: '请输dubbo说明',
+      zkAddressList: '请输入dubbo ZK地址，例：192.xx.xx.1:2181,192.xx.xx.2:2181,192.xx.xx.3:2181',
+      group: '请输入dubbo group',
+      version: '请输入dubbo version',
+      timeout: '请输入调用超时时间，单位毫秒，不填写默认为3000毫秒',
+      interfaceName: '请输入接口全类名',
+      method: '请输入调用方法',
+      args: '请输入调用方法入参，多个以,分隔，只支持String类型'
+    }
+ },
   dataSource: {
     btnTxt: '添加',
     addDialog: {

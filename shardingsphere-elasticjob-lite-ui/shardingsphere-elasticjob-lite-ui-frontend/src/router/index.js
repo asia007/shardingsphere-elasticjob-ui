@@ -38,6 +38,12 @@ export const constantRouterMap = [
     name: 'Registry center'
   },
   {
+    path: '/dubbo-job',
+    component: () => import('@/views/dubbo-job'),
+    hidden: true,
+    name: 'Dubbo job'
+  },
+  {
     path: '/data-source',
     component: () => import('@/views/data-source'),
     hidden: true,

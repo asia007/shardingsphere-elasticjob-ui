@@ -32,6 +32,20 @@
         <module>shardingsphere-elasticjob-lite-ui-frontend</module>
         <module>shardingsphere-elasticjob-lite-ui-backend</module>
     </modules>
+
+    <properties>
+        <apache.dubbo.version>2.7.8</apache.dubbo.version>
+    </properties>
+
+    <dependencies>
+        <!-- dubbo Spring Boot Start -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>${apache.dubbo.version}</version>
+        </dependency>
+        <!-- dubbo Spring Boot end -->
+    </dependencies>
     
     <build>
         <finalName>apache-shardingsphere-elasticjob-${project.version}</finalName>

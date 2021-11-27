@@ -15,27 +15,11 @@
  * limitations under the License.
  */
 
-package org.apache.shardingsphere.elasticjob.lite.ui;
+import API from '@/utils/api'
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-/**
- * Console bootstrap.
- */
-@SpringBootApplication
-public class Bootstrap {
-    
-    /**
-     * Startup RESTful server.
-     *
-     * @param args arguments
-     */
-    //CHECKSTYLE:OFF
-    public static void main(final String[] args) {
-    //CHECKSTYLE:ON
-        System.setProperty("zookeeper.sasl.client","false");
-        SpringApplication.run(Bootstrap.class, args);
-    }
-    
+export default {
+  getDubboJob: (params = {}) => API.get(`/api/dubbo-job/load`, params),
+  deleteDubboJob: (params = {}) => API.delete(`/api/dubbo-job`, params),
+  postDubboJob: (params = {}) => API.post(`/api/dubbo-job/add`, params),
+  postDubboJobConnect: (params = {}) => API.post(`/api/dubbo-job/connect`, params)
 }
