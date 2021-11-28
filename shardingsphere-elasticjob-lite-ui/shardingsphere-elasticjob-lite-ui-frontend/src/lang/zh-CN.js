@@ -155,7 +155,7 @@ export default {
       editTitle: '编辑dubbo作业',
       name: 'dubbo作业名称',
       corn: 'dubbo作业调度频率',
-      desc:'dubbo作业说明',
+      desc: 'dubbo作业说明',
       zkAddressList: 'dubbo ZK地址',
       group: 'dubbo group',
       version: 'dubbo version',
@@ -165,7 +165,7 @@ export default {
       args: '调用方法入参',
       btnConfirmTxt: '确定',
       btnConnectTxt: '测试连接',
-      btnConnectTip:'测试连接会执行dubbo服务，请确保对服务不影响的情况下测试连接！！',
+      btnConnectTip: '测试连接会执行dubbo服务，请确保对服务不影响的情况下测试连接！！',
       btnCancelTxt: '取消'
     },
     table: {
@@ -184,7 +184,7 @@ export default {
       method: '请输入调用方法',
       args: '请输入调用方法入参，多个以,分隔，只支持String类型'
     }
- },
+  },
   dataSource: {
     btnTxt: '添加',
     addDialog: {

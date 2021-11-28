@@ -3,9 +3,6 @@ package org.apache.shardingsphere.elasticjob.lite.ui.service;
 import org.apache.shardingsphere.elasticjob.lite.ui.domain.DubboJobConfiguration;
 import org.apache.shardingsphere.elasticjob.lite.ui.domain.DubboJobConfigurations;
 
-import java.io.IOException;
-import java.util.Collection;
-
 /**
  * dubbo服务job的注册service
  *
@@ -43,5 +40,5 @@ public interface DubboJobConfigurationService {
      * @param dubboJobConfiguration 配置
      * @return boolean
      */
-    Object connect(DubboJobConfiguration dubboJobConfiguration) ;
+    Object connect(DubboJobConfiguration dubboJobConfiguration);
 }

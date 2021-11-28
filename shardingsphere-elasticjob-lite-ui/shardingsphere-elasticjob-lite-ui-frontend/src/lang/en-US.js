@@ -167,8 +167,7 @@ export default {
       btnCancelTxt: 'Cancel',
       btnConnectTxt: 'Test Connect',
       btnConnectTip: 'The test connection will execute the Dubbo service. Please ensure that the test connection does' +
-        ' not affect' +
-        ' the service\n!!',
+        ' not affect the service!!'
     },
     table: {
       operate: 'Operate',

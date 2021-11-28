@@ -132,21 +132,21 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">{{ $t("dubboJob.dubboJobDialog.btnCancelTxt") }}</el-button>
-        <el-tooltip class="item" effect="dark" placement="top" :content="$t('dubboJob.dubboJobDialog.btnConnectTip')">
-          <el-button icon="el-icon-link"
-                     @click="handleConnect('form')">{{ $t("dubboJob.dubboJobDialog.btnConnectTxt") }}
+        <el-tooltip class="item" effect="dark" :content="$t('dubboJob.dubboJobDialog.btnConnectTip')" placement="top">
+          <el-button
+            icon="el-icon-link"
+            @click="handleConnect('form')">{{ $t("dubboJob.dubboJobDialog.btnConnectTxt") }}
           </el-button>
         </el-tooltip>
-        <el-button type="primary" @click="onConfirm('form')">{{
-            $t("dubboJob.dubboJobDialog.btnConfirmTxt")
-          }}
+        <el-button type="primary" @click="onConfirm('form')">
+          {{$t("dubboJob.dubboJobDialog.btnConfirmTxt")}}
         </el-button>
       </div>
     </el-dialog>
   </el-row>
 </template>
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import clone from 'lodash/clone'
 import API from '../api'
 
@@ -207,7 +207,7 @@ export default {
         interfaceName: '',
         method: '',
         timeout: 3000,
-        args: '',
+        args: ''
       },
       rules: {
         name: [
@@ -291,7 +291,7 @@ export default {
             this.addDialogVisible = true
             this.$notify({
               title: this.$t('common').notify.title,
-              message: "dubbo测试返回结果为：" + res.model,
+              message: 'dubbo测试返回结果为：' + res.model,
               type: 'success'
             })
           })

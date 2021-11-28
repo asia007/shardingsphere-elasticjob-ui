@@ -18,6 +18,8 @@
 package org.apache.shardingsphere.elasticjob.lite.ui.web.controller;
 
 import org.apache.shardingsphere.elasticjob.infra.pojo.JobConfigurationPOJO;
+import org.apache.shardingsphere.elasticjob.lite.client.job.DubboJobService;
+import org.apache.shardingsphere.elasticjob.lite.ui.service.DubboJobConfigurationService;
 import org.apache.shardingsphere.elasticjob.lite.ui.service.JobAPIService;
 import org.apache.shardingsphere.elasticjob.lite.ui.web.response.ResponseResult;
 import org.apache.shardingsphere.elasticjob.lite.ui.web.response.ResponseResultUtil;
@@ -36,14 +38,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/jobs/config")
 public final class JobConfigController {
-    
+
     private JobAPIService jobAPIService;
-    
+
+    @Autowired
+    private DubboJobConfigurationService dubboJobConfigurationService;
+
     @Autowired
     public JobConfigController(final JobAPIService jobAPIService) {
         this.jobAPIService = jobAPIService;
     }
-    
+
     /**
      * Get job configuration.
      *
@@ -56,7 +61,7 @@ public final class JobConfigController {
         data.setJobExtraConfigurations(null);
         return ResponseResultUtil.build(data);
     }
-    
+
     /**
      * Update job configuration.
      *
@@ -68,7 +73,7 @@ public final class JobConfigController {
         jobAPIService.getJobConfigurationAPI().updateJobConfiguration(jobConfiguration);
         return ResponseResultUtil.build(Boolean.TRUE);
     }
-    
+
     /**
      * Remove job configuration.
      *
@@ -77,6 +82,8 @@ public final class JobConfigController {
     @DeleteMapping("/{jobName:.+}")
     public ResponseResult<Boolean> removeJob(@PathVariable("jobName") final String jobName) {
         jobAPIService.getJobConfigurationAPI().removeJobConfiguration(jobName);
+        //同时删除dubbo job的配置
+        dubboJobConfigurationService.delete(jobName);
         return ResponseResultUtil.build(Boolean.TRUE);
     }
 }

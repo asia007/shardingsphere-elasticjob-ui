@@ -1,7 +1,7 @@
 package org.apache.shardingsphere.elasticjob.lite.ui.web.controller;
 
+import org.apache.shardingsphere.elasticjob.lite.client.dto.DubboJobConfig;
 import org.apache.shardingsphere.elasticjob.lite.ui.domain.DubboJobConfiguration;
-import org.apache.shardingsphere.elasticjob.lite.ui.domain.RegistryCenterConfiguration;
 import org.apache.shardingsphere.elasticjob.lite.ui.service.DubboJobConfigurationService;
 import org.apache.shardingsphere.elasticjob.lite.ui.web.response.ResponseResult;
 import org.apache.shardingsphere.elasticjob.lite.ui.web.response.ResponseResultUtil;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.Collection;
 
 /**
