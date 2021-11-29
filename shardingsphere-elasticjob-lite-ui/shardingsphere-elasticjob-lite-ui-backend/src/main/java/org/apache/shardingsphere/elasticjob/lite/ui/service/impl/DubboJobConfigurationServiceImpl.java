@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.lang.ref.PhantomReference;
 import java.util.List;
 
 /**
@@ -39,6 +40,7 @@ public class DubboJobConfigurationServiceImpl implements DubboJobConfigurationSe
 
     @Autowired
     private JobAPIService jobAPIService;
+
 
     /**
      * 创建CoordinatorRegistryCenter
@@ -110,6 +112,9 @@ public class DubboJobConfigurationServiceImpl implements DubboJobConfigurationSe
         if (jobBriefInfo != null && (JobBriefInfo.JobStatus.OK.equals(jobBriefInfo.getStatus()) || JobBriefInfo.JobStatus.SHARDING_FLAG.equals(jobBriefInfo.getStatus()))) {
             throw new JobConsoleException(JobConsoleException.SERVER_ERROR, "当前作业状态不支持删除操作！");
         }
+        //查询job
+        DubboJobConfiguration dubboJobConfiguration = getDubboConfig(name);
+        DubboGenericService.destroy(dubboAppName, createDubboJobConfig(dubboJobConfiguration));
         coordinatorRegistryCenter().remove(DubboJobNodePath.getJobNode(name));
         return true;
     }
@@ -130,12 +135,21 @@ public class DubboJobConfigurationServiceImpl implements DubboJobConfigurationSe
     @Override
     public Object connect(DubboJobConfiguration dubboJobConfiguration) {
 
-        DubboJobConfig dubboJobConfig = new DubboJobConfig(dubboJobConfiguration.getZkAddressList(),
-                dubboJobConfiguration.getGroup(), dubboJobConfiguration.getVersion(),
-                dubboJobConfiguration.getTimeout(), dubboJobConfiguration.getInterfaceName(),
-                dubboJobConfiguration.getMethod(), dubboJobConfiguration.getArgs());
+        DubboJobConfig dubboJobConfig = createDubboJobConfig(dubboJobConfiguration);
         return DubboGenericService.invoke(dubboAppName, dubboJobConfig);
     }
 
+    /**
+     * 创建dubbo job配置
+     *
+     * @param dubboJobConfiguration DubboJobConfiguration
+     * @return DubboJobConfig
+     */
+    private DubboJobConfig createDubboJobConfig(DubboJobConfiguration dubboJobConfiguration) {
 
+        return new DubboJobConfig(dubboJobConfiguration.getZkAddressList(),
+                dubboJobConfiguration.getGroup(), dubboJobConfiguration.getVersion(),
+                dubboJobConfiguration.getTimeout(), dubboJobConfiguration.getInterfaceName(),
+                dubboJobConfiguration.getMethod(), dubboJobConfiguration.getArgs());
+    }
 }

@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.apache.shardingsphere.elasticjob.lite.client.dto.DubboJobConfig;
 
@@ -31,7 +32,23 @@ public class DubboGenericService {
         Preconditions.checkArgument(!Strings.isNullOrEmpty(dubboJobConfig.getInterfaceName()), "dubbo" +
                 "服务类地址不能为空！");
         Preconditions.checkArgument(!Strings.isNullOrEmpty(dubboJobConfig.getMethod()), "dubbo服务调用方法不能为空！");
-        //查询job内容
+        ReferenceConfigCache referenceConfigCache = ReferenceConfigCache.getCache();
+        ReferenceConfig<GenericService> reference = createReferenceConfig(dubboAppName, dubboJobConfig);
+        // GenericService可以接住所有的实现
+        GenericService genericService = referenceConfigCache.get(reference);
+        return invokeDubbo(genericService, dubboJobConfig);
+    }
+
+    /**
+     * 创建ReferenceConfig<GenericService>
+     *
+     * @param dubboAppName   dubbo应用名称
+     * @param dubboJobConfig job配置
+     * @return ReferenceConfig<GenericService>
+     */
+    private static ReferenceConfig<GenericService> createReferenceConfig(String dubboAppName,
+                                                                         DubboJobConfig dubboJobConfig) {
+
         ReferenceConfig<GenericService> reference = new ReferenceConfig<GenericService>();
         // 当前dubbo consumer的application配置，不设置会直接抛异常
         ApplicationConfig applicationConfig = new ApplicationConfig();
@@ -50,10 +67,20 @@ public class DubboGenericService {
         reference.setTimeout(dubboJobConfig.getTimeout());
         // 声明为泛化接口
         reference.setGeneric(true);
-        reference.setCheck(true);
-        // GenericService可以接住所有的实现
-        GenericService genericService = reference.get();
-        return invokeDubbo(genericService, dubboJobConfig);
+        reference.setCheck(false);
+        return reference;
+    }
+
+    /**
+     * 清理ReferenceConfigCache
+     *
+     * @param dubboAppName   应用名称
+     * @param dubboJobConfig 配置
+     */
+    public static void destroy(String dubboAppName, DubboJobConfig dubboJobConfig) {
+        ReferenceConfigCache referenceConfigCache = ReferenceConfigCache.getCache();
+        ReferenceConfig<GenericService> reference = createReferenceConfig(dubboAppName, dubboJobConfig);
+        referenceConfigCache.destroy(reference);
     }
 
 
