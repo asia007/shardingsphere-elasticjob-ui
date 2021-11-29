@@ -12,6 +12,11 @@ ElasticJob-UI 是 [ElasticJob](http://shardingsphere.apache.org/elasticjob/) 的
 - shardingsphere-elasticjob-lite-ui：ElasticJob-Lite 管控端
 - shardingsphere-elasticjob-cloud-ui：ElasticJob-Cloud 管控端
 
+## 动态添加dubbo job
+business service：业务处理服务
+elastic-job client：用于监听dubbo job节点，专门进行job服务注册与执行没有任务业务代码，对business service采用的是GenericServcie的泛化调用，不需要彼引依赖，至少需要两台服务器，一台执行job，另一台为失效进行转移
+elastic-job manager：job服务管理控制台，用来添加新的job服务并管理，数据存在放在ZK,切换不同的注册中心数据也会相切换，注册中心地址必须和JOB客户端配置的ZK注册中心地址一致，通过ZK节点监听的方式新增job
+
 ### ElasticJob-UI 前端
 
 shardingsphere-elasticjob-lite-ui-frontend & shardingsphere-elasticjob-cloud-ui-frontend 模块基于 [vue](https://github.com/vuejs/vue)，
